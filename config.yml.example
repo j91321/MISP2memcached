@@ -1,0 +1,18 @@
+memcached:
+  host: 127.0.0.1
+  port: 11211
+misp:
+  url: https://127.0.0.1
+  token: "PUT_MISP_TOKEN_HERE"
+  ignore_cert_errors: false
+  initial_event_timestamp: 365d
+  refresh_event_timestamp: 1h
+hash:
+  enabled: true
+  expires: 0
+network:
+  enabled: true
+  expires: 0
+web:
+  enabled: true
+  expires: 0
