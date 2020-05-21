@@ -1,5 +1,10 @@
 def filter(event)
-    ids = event.get("[enrich][tmp]").split(',')
+    event_tmp = event.get("[enrich][tmp]")
+    if event_tmp.nil?
+            return [event]
+    else
+       ids = event_tmp.split(',')
+    end
     ids.each do |item|
         key_value = item.split("#")
         if !event.get('[misp][event_id]')
