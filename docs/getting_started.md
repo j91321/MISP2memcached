@@ -282,4 +282,4 @@ Fill out the form like this:
 
 Save the scripted field, now we can go into discovery use KQL `misp.event_id: *` again and see that the documents now have misp.url field which is a clickable URL that opens new tab with the matching event in MISP. (You need to be logged in).
 
-![Scripted field](./kibana_misp_scripted_field.PNG)
+![Scripted field](./images/kibana_misp_scripted_field.PNG)
