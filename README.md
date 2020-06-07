@@ -2,7 +2,11 @@
 
 Load IOCs from MISP Threat sharing platform to memcached. Use Logstash to enrich your SIEM logs.
 
+![Final result](./docs/images/kibana_scripted_field.gif)
+
 Examples are provided for Elasticsearch based SIEM with ECS mapping, but you can modify the examples to work with your setup.
+
+Check out the [Getting started](https://github.com/j91321) if you want to see a simple use case on how to enrich data from Sysmon shipped by Winlogbeat.
 
 ## Requirements
 
@@ -90,11 +94,12 @@ web:
 
 ## Known problems
 
-- Memcached doesn't allow whitespace characters in keys. This makes it unusable for registry keys, user agents etc.
+- Memcached doesn't allow whitespace characters in keys. This makes it unusable for registry keys, user agents etc. without adding some form of encoding
 - Memcached TLS and authentication support is kind of unintuitive and a pain to configure. Redis would be much better fit, 
 unfortunately there is no redis filter plugin for Logstash.
 - Must use custom ruby filter to parse results from memcached in Logstash, this is not ideal, but unavoidable. Again redis
 would probably be a better fit.
+- Probably many other
 
 ## Based on
 
