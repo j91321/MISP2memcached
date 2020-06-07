@@ -18,7 +18,7 @@ We won't go into details on how to install or setup individual components if nec
 Everything except the Windows 10 VM can be run from Docker container, if you want to try this. 
 (If you have separate docker host for Linux and Windows you can run everything from docker)
 
-![Environment](https://github.com/j91321/MISP2memcached/docs/images/environment.png)
+![Environment](./images/environment.png)
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ cp config.yml.example config.yml
 
 Now we will log into the MISP instance and obtain the API key.
 
-![MISP auth key](https://github.com/j91321/MISP2memcached/docs/images/misp_automation.PNG)
+![MISP auth key](./images/misp_automation.PNG)
 
 We will edit `config.yml` and add the API key under `misp.token` and change `misp.url` to point to out MISP instance.
 We have also set `misp.ignore_cert_errors` to `true` because this is a development MISP instance and it doesn't have proper SSL
@@ -86,7 +86,7 @@ As a test we will create two Events in MISP with some attributes, if you already
 
 These events will contain attributes with type `domain`, `ip-dst`, `sha256`. We're using the domain and ip of our server as an IoC and sha256 hash of calc.exe
 
-![Attribute example](https://github.com/j91321/MISP2memcached/docs/images/misp_domain.PNG)
+![Attribute example](./images/misp_domain.PNG)
 
 Now we can run `misp2memcached.py` and load the attributes into memcached. No logs will be printed for now, but you can verify the results by connecting to the memcached.
 ```yaml
@@ -118,7 +118,7 @@ cp process_ioc.rb /etc/logstash/
 
 Now our pipeline will consist of three components input, filter and output.
 
-First create [01-input.conf](https://github.com/j91321/MISP2memcached/docs/examples/01-input.conf) in `/etc/logstash/conf.d/` (or your path for pipelines). It's a simple beats input.
+First create [01-input.conf](./examples/01-input.conf) in `/etc/logstash/conf.d/` (or your path for pipelines). It's a simple beats input.
 
 ```logstash
 input {
@@ -128,7 +128,7 @@ input {
 }
 ```
 
-Next we will create [03-output.conf](https://github.com/j91321/MISP2memcached/docs/examples/03-output.conf). I'm creating a minimalistic input and output configuration. When using in production
+Next we will create [03-output.conf](./examples/03-output.conf). I'm creating a minimalistic input and output configuration. When using in production
 make sure to have Security setup on your Elasticsearch. I also recommend securing Beats-Logstash communication with SSL according to the documentation.
 
 ```logstash
@@ -140,7 +140,7 @@ output {
 }
 ```
 
-At last we will create [02-filter.conf](https://github.com/j91321/MISP2memcached/docs/examples/02-filter.conf) this actually contains the filters used for enriching winlogbeat data.
+At last we will create [02-filter.conf](./examples/02-filter.conf) this actually contains the filters used for enriching winlogbeat data.
 ```logstash
 filter{
     if [destination][ip] {
@@ -258,7 +258,7 @@ Now new fields `misp.event_id` and `misp.type` should be visible in Kibana. Don'
 
 We can use KQL `misp.event_id: *` to find all documents where `misp.event_id` exists.
 
-![New fields in kibana](https://github.com/j91321/MISP2memcached/docs/images/misp_kibana.PNG)
+![New fields in kibana](./images/misp_kibana.PNG)
 
 Now to make the analyst user experience a bit better, we will add a scripted field with URL pointing to our MISP event.
 
@@ -278,8 +278,8 @@ Fill out the form like this:
  
  Modify the URL template to point to the MISP instance. The `{{value}}` will be replaced by values from `misp.event_id` field.
 
-![Kibana form](https://github.com/j91321/MISP2memcached/docs/images/kibana_scripted_field_form.png)
+![Kibana form](./images/kibana_scripted_field_form.png)
 
 Save the scripted field, now we can go into discovery use KQL `misp.event_id: *` again and see that the documents now have misp.url field which is a clickable URL that opens new tab with the matching event in MISP. (You need to be logged in).
 
-![Scripted field](https://github.com/j91321/MISP2memcached/docs/images/kibana_misp_scripted_field.PNG)
+![Scripted field](./kibana_misp_scripted_field.PNG)

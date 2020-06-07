@@ -6,7 +6,7 @@ Load IOCs from MISP Threat sharing platform to memcached. Use Logstash to enrich
 
 Examples are provided for Elasticsearch based SIEM with ECS mapping, but you can modify the examples to work with your setup.
 
-Check out the [Getting started](https://github.com/j91321) if you want to see a simple use case on how to enrich data from Sysmon shipped by Winlogbeat.
+Check out the [Getting started](./docs/getting_started.md) if you want to see a simple use case on how to enrich data from Sysmon shipped by Winlogbeat.
 
 ## Requirements
 
