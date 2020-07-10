@@ -49,7 +49,7 @@ IOCs are split into three arbitrary categories:
 - network (misp-ip, misp-domain)
 - web (misp-url)
 
-If the `enabled` variable is set to `true` data will be queried in MISP and loaded into memcached. Expires sets the  
+If the `enabled` variable is set to `true` data will be queried in MISP and loaded into memcached. Expires sets the time in seconds when the key is removed from memcached. `0` sets the keys to never expire.
 ```yaml
 hash:
   enabled: true
